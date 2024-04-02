@@ -19,6 +19,7 @@ public class Individual(int bitsCount)
 
     public void GenerateDecimalValue()
     {
+        DecimalValue = 0;
         int bitPosition = Gene.Length - 1;
 
         for(int i = 0; i < Gene.Length; i++)
@@ -30,6 +31,7 @@ public class Individual(int bitsCount)
 
     public void NormalizeValue()
     {
+        Normalize = 0;
         double bitLength = Math.Pow(2, Gene.Length) - 1;
 
         double dec = DecimalValue;
@@ -39,6 +41,18 @@ public class Individual(int bitsCount)
 
     public void FunctionOfX()
     {
+        X = 0;
         X = Math.Pow(Normalize, 2) - (5 * Normalize) + 6;
+    }
+
+    public void Mutation()
+    {
+        var random = new Random();
+
+        int switchValue = random.Next(0, Gene.Length - 1);
+
+        int newValue = Gene[switchValue] == 0 ? 1 : 0;
+
+        Gene[switchValue] = newValue;
     }
 }
