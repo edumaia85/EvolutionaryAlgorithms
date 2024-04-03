@@ -103,19 +103,20 @@ int loops = int.Parse(Console.ReadLine());
 while (loops >= 0)
 {
     MutateIndividualAutomatic(gene, individual);
-
-    Console.WriteLine("------Cromossomo------");
-    Console.WriteLine();
-    for (int i = 0; i < individual.Gene.Length; i++)
-    {
-        Console.Write(individual.Gene[i] + " ");
-    }
-
-    Console.WriteLine();
-    Console.WriteLine();
-
-    Console.WriteLine($"Valor decimal: {individual.DecimalValue}");
-    Console.WriteLine($"Normalizar: {individual.Normalize}");
-    Console.WriteLine($"F(x): {individual.X}");
     loops--;
 }
+
+Console.WriteLine();
+Console.WriteLine("------Cromossomo------");
+Console.WriteLine();
+for (int i = 0; i < individual.Gene.Length; i++)
+{
+    Console.Write(individual.Gene[i] + " ");
+}
+
+Console.WriteLine();
+Console.WriteLine();
+
+Console.WriteLine($"Valor decimal: {individual.DecimalValue}");
+Console.WriteLine($"Normalizar: {individual.Normalize}");
+Console.WriteLine($"F(x): {individual.X}");
