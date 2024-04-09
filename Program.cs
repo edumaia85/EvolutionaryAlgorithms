@@ -2,6 +2,11 @@
 
 var random = new Random();
 
+Console.Write("Digite o tamanho da população que você deseja gerar: ");
+var populationSize = int.Parse(Console.ReadLine());
+
+var population = new Population(populationSize);
+
 Console.Write("Digite o número de casas do número binário: ");
 
 int bitCounts = int.Parse(Console.ReadLine());
@@ -10,8 +15,10 @@ var individual = new Individual();
 
 var gene = new int[bitCounts];
 
-void FillGeneVector(int[] gene, Random random)
+void FillGeneVector(int[] gene)
 {
+    var random = new Random();
+
     for (int i = 0; i < gene.Length; i++)
     {
         gene[i] = random.Next(0, 2);
@@ -34,7 +41,7 @@ int GenerateDecimalValue(int[] gene)
 
 double NormalizeValue(int[] gene, int decimalValue)
 {
-    double normalize = 0;
+    double normalize;
     double bitLength = Math.Pow(2, gene.Length) - 1;
 
     double dec = decimalValue;
@@ -46,7 +53,7 @@ double NormalizeValue(int[] gene, int decimalValue)
 
 double FunctionOfX(double normalize)
 {
-    double x = 0;
+    double x;
     x = Math.Pow(normalize, 2) - (5 * normalize) + 6;
 
     return x;
@@ -76,7 +83,20 @@ void MutateIndividualAutomatic(int[] gene, Individual individual)
     }
 }
 
-FillGeneVector(gene, random);
+
+Individual createIndividual(int bits)
+{
+    int[] gene = new int[bits];
+
+    FillGeneVector(gene);
+    int decimalValue = GenerateDecimalValue(gene);
+    double normalize = NormalizeValue(gene, decimalValue);
+    double x = FunctionOfX(normalize);
+
+    return new Individual(string.Join(",", gene), decimalValue, normalize, x);
+}
+
+population.CreatePopulation();
 
 individual.Gene = string.Join(",", gene);
 individual.DecimalValue = GenerateDecimalValue(gene);
